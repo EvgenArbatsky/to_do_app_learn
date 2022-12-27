@@ -57,6 +57,18 @@ function deleteTask(event) {
     // Проверяем что клик был по кнопке "удалить задачу"
     if (event.target.dataset.action === 'delete') {
         const parentNode = event.target.closest('.list-group-item');
+        // Определяем ID задачи
+        const id = Number(parentNode.id);
+        // Находим индекс задачи в массиве
+        const index = tasks.findIndex(function(task){
+            if (task.id === id) {
+                return true;
+            }
+        })
+        // Удаляем задачу из массива с задачами
+        tasks.splice(index, 1);
+
+        // Удаляем задачу из разметки
         parentNode.remove();
         // Возвращаем заглушку если список пуст
         if (tasksList.children.length === 1) {
