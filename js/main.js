@@ -13,7 +13,7 @@ tasksList.addEventListener('click', doneTask)
 
 // Функции
 function addTask(event) {
-    // Отменяем отправку формы
+    // Отменяем отправку формы, чтобы страница не перезагружалась
     event.preventDefault();
     // Достаем текст задачи из поля ввода
     const taskText = taskInput.value;
@@ -81,6 +81,15 @@ function doneTask(event) {
     // Проверяем, что клик был по кнопке "Задача выполнена"
     if (event.target.dataset.action === "done") {
         const parentNode = event.target.closest('.list-group-item');
+
+        const id = Number(parentNode.id);
+        const task = tasks.find(function (task) {
+            if (task.id === id) {
+                return true
+            }
+        })
+        task.done = !task.done
+
         const taskTitle = parentNode.querySelector('.task-title');
         taskTitle.classList.toggle('task-title--done')
     }
