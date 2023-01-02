@@ -58,7 +58,7 @@ function deleteTask(event) {
         })
         // Удаляем задачу из массива с задачами
         tasks.splice(index, 1);
-        saveLocalStorage();
+        saveToLocalStorage();
         // Удаляем задачу из разметки
         parentNode.remove();
 
